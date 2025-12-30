@@ -17,8 +17,8 @@ const AuthLayout = ({ children }) => {
         <div className=" grid grid-cols-1 z-20">
           <StatsInfoCard
             icon={<LuTrendingUpDown />}
-            label="Track Your Incme"
-            value="430,000"
+            label="Track Your Expenses and Income"
+            value="$430,000"
             color="bg-primary"
           />
         </div>
