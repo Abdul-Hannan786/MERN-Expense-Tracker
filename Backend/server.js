@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,8 +19,17 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 connectDB();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use("/api/auth", authRoutes);
+
+// Serve uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
