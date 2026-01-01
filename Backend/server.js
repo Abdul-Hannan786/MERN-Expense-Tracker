@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -31,6 +32,7 @@ const __dirname = dirname(__filename);
 app.use("/api/auth", authRoutes);
 app.use("/api/income", incomeRoutes)
 app.use("/api/expense", expenseRoutes)
+app.use("/api/dashboard", dashboardRoutes)
 
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
