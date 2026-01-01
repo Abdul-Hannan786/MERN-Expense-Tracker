@@ -31,7 +31,7 @@ export const addExpense = async (req, res) => {
 export const getAllExpense = async (req, res) => {
   const userId = req.user.id;
   try {
-    const expense = await Expense.find({ userId }).sort({ date: -1 });
+    const expense = await Expense.find({ userId }).sort({ createdAt: -1 });
     res.status(200).json(expense);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -52,7 +52,7 @@ export const deleteExpense = async (req, res) => {
 export const downloadExpenseExcel = async (req, res) => {
   const userId = req.user.id;
   try {
-    const expense = await Expense.find({ userId }).sort({ date: -1 });
+    const expense = await Expense.find({ userId }).sort({ createdAt: -1 });
 
     // Prepare data for excel
     const data = expense.map((item) => ({
