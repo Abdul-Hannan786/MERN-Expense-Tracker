@@ -48,7 +48,7 @@ export const deleteIncome = async (req, res) => {
   }
 };
 
-//Download Excel
+// Download Excel
 export const downloadIncomeExcel = async (req, res) => {
   const userId = req.user.id;
   try {

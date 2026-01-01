@@ -8,7 +8,7 @@ const IncomeSchema = new mongoose.Schema(
       required: true,
     },
     icon: { type: String },
-    source: { type: String, required: true }, // Exmaple: Salary, Food, Travelling
+    source: { type: String, required: true }, // Exmaple: Salary, Freelancing
     amount: { type: Number, required: true },
     date: { type: Date, default: Date.now() },
   },
