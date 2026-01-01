@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.post("/add", protect, addIncome);
-router.post("/get", protect, getAllIncome);
+router.get("/get", protect, getAllIncome);
 router.get("/downloadexcel", protect, downloadIncomeExcel);
 router.delete("/:id", protect, deleteIncome);
 
