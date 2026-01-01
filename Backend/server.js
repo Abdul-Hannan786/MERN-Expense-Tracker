@@ -4,6 +4,7 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import incomeRoutes from "./routes/incomeRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -27,6 +28,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.use("/api/auth", authRoutes);
+app.use("/api/income", incomeRoutes)
 
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
