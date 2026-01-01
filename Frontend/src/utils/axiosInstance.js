@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 // Request Inceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem("tokn");
+    const accessToken = localStorage.getItem("token");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         // Redirect to login page
-        window.location.href("/login");
+        window.location.href = "/login";
       } else if (error.response.status === 500) {
         console.error("Server error. Please try again later.");
       }

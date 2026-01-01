@@ -4,10 +4,13 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -26,9 +29,29 @@ const Login = () => {
     }
 
     setError("");
+    setLoading(true);
 
     // Login API Call
-    
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,7 +68,7 @@ const Login = () => {
             onChange={({ target }) => setEmail(target.value)}
             label="Email Address"
             placeholder="Enter your email address"
-            trype="text"
+            type="text"
           />
           <Input
             value={password}
@@ -57,7 +80,9 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button className="btn-primary">Login</button>
+          <button className="btn-primary" disabled={loading}>
+            Login
+          </button>
           <p className="text-[14px] text-slate-800 mt-3">
             Don't have an account?{" "}
             <Link to="/signup" className="font-medium text-primary underline">
