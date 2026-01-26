@@ -10,6 +10,7 @@ import InfoCard from "../../components/Cards/InfoCard";
 import { addThousandsSeparator } from "../../utils/helper";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
+import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 
 const Home = () => {
   useUserAuth();
@@ -71,7 +72,11 @@ const Home = () => {
             onSeeMore={() => navigate("/expense")}
           />
 
-          <FinanceOverview />
+          <FinanceOverview
+            totalBalance={dashboardData?.totalBalance || 0}
+            totalIncome={dashboardData?.totalIncome}
+            totalExpense={dashboardData?.totalExpense}
+          />
         </div>
       </div>
     </Dashboardlayout>
