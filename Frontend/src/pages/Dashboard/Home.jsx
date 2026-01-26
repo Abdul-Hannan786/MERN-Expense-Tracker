@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Dashboardlayout from "../../components/layouts/Dashboardlayout";
 import { useUserAuth } from "../../hooks/useUserAuth";
@@ -8,6 +9,7 @@ import { IoMdCard } from "react-icons/io";
 import InfoCard from "../../components/Cards/InfoCard";
 import { addThousandsSeparator } from "../../utils/helper";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 
 const Home = () => {
   useUserAuth();
@@ -63,7 +65,14 @@ const Home = () => {
           />
         </div>
 
-        <div></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <RecentTransactions
+            transactions={dashboardData?.recentTransactions}
+            onSeeMore={() => navigate("/expense")}
+          />
+
+          <FinanceOverview />
+        </div>
       </div>
     </Dashboardlayout>
   );
