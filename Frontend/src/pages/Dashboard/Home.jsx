@@ -7,6 +7,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import { IoMdCard } from "react-icons/io";
 import InfoCard from "../../components/Cards/InfoCard";
 import { addThousandsSeparator } from "../../utils/helper";
+import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 
 const Home = () => {
   useUserAuth();
@@ -48,19 +49,21 @@ const Home = () => {
           />
 
           <InfoCard
-            icon={<IoMdCard />}
+            icon={<LuWalletMinimal />}
             label="Total Income"
-            value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+            value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color="bg-orange-500"
           />
 
           <InfoCard
-            icon={<IoMdCard />}
+            icon={<LuHandCoins />}
             label="Total Expense"
-            value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+            value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color="bg-red-500"
           />
         </div>
+
+        <div></div>
       </div>
     </Dashboardlayout>
   );
