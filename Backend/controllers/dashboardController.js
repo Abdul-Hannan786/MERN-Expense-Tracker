@@ -21,13 +21,13 @@ export const getDashboardData = async (req, res) => {
       { $group: { _id: null, total: { $sum: "$amount" } } },
     ]);
 
+
     // Get income transactions in the last 60 days
     const last60DaysIncomeTransactions = await Income.find({
       userId,
       date: { $gte: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000) },
     }).sort({ createdAt: -1 });
 
-    console.log("Console 1", last60DaysIncomeTransactions)
 
     // Get total income for last 60 days
     const incomeLast60Days = last60DaysIncomeTransactions.reduce(
