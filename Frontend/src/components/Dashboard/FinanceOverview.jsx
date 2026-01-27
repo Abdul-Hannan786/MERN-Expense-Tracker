@@ -12,7 +12,7 @@ const FinanceOverview = ({ totalBalance, totalExpense, totalIncome }) => {
   return (
     <div className="card">
       <div className="items-center justify-between">
-        <h5 className="text-lg">Financial Overview</h5>
+        <h5 className="text-lg font-semibold">Financial Overview</h5>
       </div>
 
       <CustomPieChart
