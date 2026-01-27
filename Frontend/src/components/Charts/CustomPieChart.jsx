@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import CustomTooltip from "./CustomTooltip";
 
 const CustomPieChart = ({
   data,
