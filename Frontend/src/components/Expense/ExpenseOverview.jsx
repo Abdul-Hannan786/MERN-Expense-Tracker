@@ -1,0 +1,37 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useEffect, useState } from "react";
+import { prepareExpenseLineChartData } from "../../utils/helper";
+import { LuPlus } from "react-icons/lu";
+
+const ExpenseOverview = ({ transactions, onAddExpense }) => {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    const result = prepareExpenseLineChartData(transactions);
+    setChartData(result);
+
+    return () => {};
+  }, [transactions]);
+
+  return (
+    <div className="card">
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h5 className="text-lg font-semibold">Expense Overview</h5>
+          <p className="text-xs lg:text-sm text-gray-400 mt-0.5">
+            Track your spending trends over time and gain insights into where
+            your monet goes.
+          </p>
+        </div>
+
+        <button className="add-btn" onClick={onAddExpense}>
+          <LuPlus className="text-lg" /> Add Expense
+        </button>
+      </div>
+
+      <div className="mt-10"></div>
+    </div>
+  );
+};
+
+export default ExpenseOverview;

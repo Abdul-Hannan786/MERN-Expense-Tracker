@@ -5,6 +5,7 @@ import Dashboardlayout from "../../components/layouts/Dashboardlayout";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
+import ExpenseOverview from "../../components/Expense/ExpenseOverview";
 
 const Expense = () => {
   useUserAuth();
@@ -82,7 +83,16 @@ const Expense = () => {
 
   return (
     <Dashboardlayout activeMenu="Expense">
-      <div className="my-5 mx-auto"></div>
+      <div className="my-5 mx-auto">
+        <div className="grid grid-cols-1 gap-6">
+          <div>
+            <ExpenseOverview
+              transactions={expenseData}
+              onAddExpense={() => setOpenAddExpenseModal(true)}
+            />
+          </div>
+        </div>
+      </div>
     </Dashboardlayout>
   );
 };
