@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import Dashboardlayout from "../../components/layouts/Dashboardlayout";
 import IncomeOverview from "../../components/Income/IncomeOverview";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 const Income = () => {
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -12,7 +15,23 @@ const Income = () => {
   });
 
   // Get All Income Details
-  const fetchIncomeDetails = async () => {};
+  const fetchIncomeDetails = async () => {
+    if (loading) return;
+
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `${API_PATHS.INCOME.GET_ALL_INCOME}`,
+      );
+      if (response.data) {
+        setIncomeData(response.data);
+      }
+    } catch (error) {
+      console.log("Something went wrong. Please try again", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Handle Add Income
   const handleAddIncome = async (income) => {};
@@ -21,7 +40,13 @@ const Income = () => {
   const deleteIncome = async (id) => {};
 
   // handle Download income details
-  const handleDownloadIncomeDetails = async () => {}
+  const handleDownloadIncomeDetails = async () => {};
+
+  useEffect(() => {
+    fetchIncomeDetails()
+
+    return () => {}
+  }, [])
 
   return (
     <Dashboardlayout activeMenu="Income">

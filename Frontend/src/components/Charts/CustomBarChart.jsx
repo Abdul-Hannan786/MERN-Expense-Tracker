@@ -10,7 +10,7 @@ import {
   Cell,
 } from "recharts";
 
-const CustomBarChart = ({ data }) => {
+const CustomBarChart = ({ data, type }) => {
   // function to alternate colors
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "#cfbebf";
@@ -43,7 +43,7 @@ const CustomBarChart = ({ data }) => {
           <CartesianGrid stroke="none" />
 
           <XAxis
-            dataKey="category"
+            dataKey={type === "income" ? "month" : "category"}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
