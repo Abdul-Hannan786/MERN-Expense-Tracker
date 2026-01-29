@@ -1,18 +1,19 @@
 import {
-  Bar,
   BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
+  Bar,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Cell,
 } from "recharts";
 
 const CustomBarChart = ({ data }) => {
-  // Function to alternate colors
+  // function to alternate colors
   const getBarColor = (index) => {
-    return index % 2 === 0 ? "#875cf5" : "#cfbefb";
+    return index % 2 === 0 ? "#875cf5" : "#cfbebf";
   };
 
   const CustomTooltip = ({ active, payload }) => {
@@ -42,14 +43,13 @@ const CustomBarChart = ({ data }) => {
           <CartesianGrid stroke="none" />
 
           <XAxis
-            dataKey="month"
+            dataKey="category"
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
           <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
 
           <Tooltip content={CustomTooltip} />
-
           <Bar
             dataKey="amount"
             fill="#FF8042"
