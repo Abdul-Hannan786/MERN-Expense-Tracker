@@ -3,20 +3,15 @@ import React, { useEffect, useState } from "react";
 import CustomPieChart from "../Charts/CustomPieChart";
 
 const COLORS = [
-  "#875CF5", // purple
-  "#FA2C37", // red
-  "#FF6900", // orange
-  "#4F39F6", // indigo
+  "#875CF5", // purple         
+  "#FF6900", // orange         
+  "#A3E635", // lime green pop  
+  "#FA2C37", // red            
   "#00C2FF", // bright sky blue
-  "#00E396", // fresh teal green
-  "#FEB019", // warm amber
-  "#A3E635", // lime green pop
-  "#2563EB", // confident blue
-  "#14B8A6", // teal
-  "#10B981", // emerald
-  "#EC4899", // pink rose
-  "#84CC16", // lime (muted)
+  "#EC4899", // pink rose      
+  "#FEB019", // warm amber     
   "#06B6D4", // cyan
+  "#84CC16", // lime (muted)   
 ];
 
 const RecentIncomeWithChart = ({ data, totalIncome }) => {
