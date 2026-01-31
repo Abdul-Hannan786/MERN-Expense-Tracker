@@ -7,6 +7,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import toast from "react-hot-toast";
+import IncomeList from "../../components/Income/IncomeList";
 
 const Income = () => {
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -67,7 +68,10 @@ const Income = () => {
       toast.success("Income added successfully");
       fetchIncomeDetails();
     } catch (error) {
-      console.error("Error adding income: ", error.response?.data?.message || error.message);
+      console.error(
+        "Error adding income: ",
+        error.response?.data?.message || error.message,
+      );
     }
   };
 
@@ -93,6 +97,12 @@ const Income = () => {
               onAddIncome={() => setOpenAddIncomeModal(true)}
             />
           </div>
+
+          <IncomeList
+            transactions={incomeData}
+            onDelete={(id) => setOpenDeleteAlert({ show: true, date: id })}
+            onDownload={handleDownloadIncomeDetails}
+          />
         </div>
 
         <Modal
