@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import Dashboardlayout from "../../components/layouts/Dashboardlayout";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import toast from "react-hot-toast";
 
 const Expense = () => {
   useUserAuth();
@@ -14,16 +18,16 @@ const Expense = () => {
   });
 
   // Get All Expense Details
-  const fetchIncomeDetails = async () => {
+  const fetchExpenseDetails = async () => {
     if (loading) return;
 
     setLoading(true);
     try {
       const response = await axiosInstance.get(
-        `${API_PATHS.INCOME.GET_ALL_INCOME}`,
+        `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`,
       );
       if (response.data) {
-        setIncomeData(response.data);
+        setExpenseData(response.data);
       }
     } catch (error) {
       console.log("Something went wrong. Please try again", error);
@@ -31,6 +35,50 @@ const Expense = () => {
       setLoading(false);
     }
   };
+
+  // Handle Add Expense
+  const handleAddExpense = async (expense) => {
+    const { category, amount, date, icon } = expense;
+
+    // Validation Checks
+    if (!category.trim()) {
+      toast.error("Category is required");
+      return;
+    }
+
+    if (!amount || isNaN(amount) || Number(amount) <= 0) {
+      toast.error("Amount should be a number greater than 0");
+      return;
+    }
+
+    if (!date) {
+      toast.error("Date is required");
+      return;
+    }
+
+    try {
+      await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
+        category,
+        amount,
+        date,
+        icon,
+      });
+      setOpenAddExpenseModal(false);
+      toast.success("Expense added successfully");
+      fetchExpenseDetails();
+    } catch (error) {
+      console.error(
+        "Error adding expense: ",
+        error.response?.data?.message || error.message,
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchExpenseDetails();
+
+    return () => {};
+  }, []);
 
   return (
     <Dashboardlayout activeMenu="Expense">
