@@ -29,6 +29,9 @@ connectDB();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.get("/", (req, res) => {
+  res.send("Hello World")
+})
 app.use("/api/auth", authRoutes);
 app.use("/api/income", incomeRoutes)
 app.use("/api/expense", expenseRoutes)
