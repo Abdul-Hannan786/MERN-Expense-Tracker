@@ -96,7 +96,9 @@ const Income = () => {
   };
 
   // handle Download income details
-  const handleDownloadIncomeDetails = async () => {};
+  const handleDownloadIncomeDetails = async () => {
+    
+  };
 
   useEffect(() => {
     fetchIncomeDetails();
