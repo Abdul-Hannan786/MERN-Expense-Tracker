@@ -67,7 +67,7 @@ export const downloadExpenseExcel = async (req, res) => {
     ws["!cols"] = [
       { wch: 20 }, // Category column width
       { wch: 12 }, // Amount column width
-      { wch: 18 }, // Date column width (important)
+      { wch: 18 }, // Date column width 
     ];
 
     xlsx.utils.book_append_sheet(wb, ws, "Expense");
