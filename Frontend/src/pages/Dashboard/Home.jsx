@@ -43,6 +43,7 @@ const Home = () => {
     fetchDashboardData();
     return () => {};
   }, []);
+  console.log(dashboardData)
 
   return (
     <Dashboardlayout activeMenu="Dashboard">
@@ -95,7 +96,7 @@ const Home = () => {
             data={
               dashboardData?.last60DaysIncome?.transactions?.slice(0, 8) || []
             }
-            totalIncome={dashboardData?.totalIncome || 0}
+            totalIncome={dashboardData?.last60DaysIncome?.total || 0}
           />
 
           <RecentIncome
