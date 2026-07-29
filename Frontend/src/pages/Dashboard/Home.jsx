@@ -31,6 +31,7 @@ const Home = () => {
       const response = await axiosInstance.get(API_PATHS.DASHBOARD.GET_DATA);
       if (response.data) {
         setDashboardData(response.data);
+        console.log("Dashboard Response", response.data)
       }
     } catch (error) {
       console.error("Something went wrong. Please try again", error);
@@ -43,7 +44,6 @@ const Home = () => {
     fetchDashboardData();
     return () => {};
   }, []);
-  console.log(dashboardData)
 
   return (
     <Dashboardlayout activeMenu="Dashboard">
