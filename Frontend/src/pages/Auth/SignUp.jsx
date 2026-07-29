@@ -7,7 +7,6 @@ import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/UserContext";
-import uploadImage from "../../utils/uploadImage";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -27,7 +26,7 @@ const SignUp = () => {
 
     // Upload image if given
 
-    let profileImageUrl = "";
+    // let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter your name");
@@ -48,17 +47,27 @@ const SignUp = () => {
 
     // Signup API Call
     try {
-      if (profilePic) {
-        const imgUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imgUploadRes.imageUrl || "";
-      }
+      // if (profilePic) {
+      //   const imgUploadRes = await uploadImage(profilePic);
+      //   profileImageUrl = imgUploadRes.imageUrl || "";
+      // }
 
-      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
-        fullName,
-        email,
-        password,
-        profileImageUrl,
-      });
+      console.log(profilePic);
+      let formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("image", profilePic);
+
+      const response = await axiosInstance.post(
+        API_PATHS.AUTH.REGISTER,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
+      );
 
       const { token, user } = response.data;
       if (token) {
@@ -76,7 +85,6 @@ const SignUp = () => {
       setLoading(false);
     }
   };
-
   return (
     <AuthLayout>
       <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
