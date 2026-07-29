@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-api
+
 import { v2 as cloudinary } from "cloudinary";
 import { Readable } from "stream";
 
