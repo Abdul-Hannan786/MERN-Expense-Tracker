@@ -12,7 +12,7 @@ const IncomeSchema = new mongoose.Schema(
     amount: { type: Number, required: true },
     date: { type: Date, default: Date.now() },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Income = mongoose.model("Income", IncomeSchema);

@@ -12,7 +12,7 @@ const ExpenseSchema = new mongoose.Schema(
     amount: { type: Number, required: true },
     date: { type: Date, default: Date.now() },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
