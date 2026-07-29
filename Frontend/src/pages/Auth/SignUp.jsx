@@ -26,7 +26,6 @@ const SignUp = () => {
 
     // Upload image if given
 
-    // let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter your name");
@@ -47,12 +46,7 @@ const SignUp = () => {
 
     // Signup API Call
     try {
-      // if (profilePic) {
-      //   const imgUploadRes = await uploadImage(profilePic);
-      //   profileImageUrl = imgUploadRes.imageUrl || "";
-      // }
 
-      console.log(profilePic);
       let formData = new FormData();
       formData.append("fullName", fullName);
       formData.append("email", email);

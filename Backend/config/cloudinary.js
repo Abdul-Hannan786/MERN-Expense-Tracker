@@ -12,7 +12,6 @@ cloudinary.config({
 });
 
 export const uploadToCloudinary = (buffer, folder = "courses") => {
-  console.log("Cloudinary config before upload:");
 
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(

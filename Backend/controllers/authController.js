@@ -11,16 +11,11 @@ const generateToken = (id) => {
 export const registerUser = async (req, res) => {
   const { fullName, email, password } = req.body;
   const imageFile = req.file;
-  // console.log(imageFile)
-  // console.log(fullName, email, password)
 
   // Validation: Check for missing fields
   if (!fullName || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
-  //  console.log("console 2")
-
-  //  console.log("console 3")
 
   try {
     // Check if email already exists
@@ -35,15 +30,10 @@ export const registerUser = async (req, res) => {
           .status(400)
           .json({ message: "Only image files are allowed" });
       }
-      //   console.log("console 4")
-      // console.log(imageFile.buffer)
       profileImageUrl = await uploadToCloudinary(imageFile.buffer, "users");
     }
 
     // Create the user
-    console.log("Console Before")
-    console.log(profileImageUrl)
-    console.log("Console After")
     const user = await User.create({
       fullName,
       email,
@@ -51,7 +41,6 @@ export const registerUser = async (req, res) => {
       profileImageUrl: profileImageUrl.secure_url ? profileImageUrl.secure_url : "",
     });
 
-    //   console.log("console 5")
     res.status(201).json({
       id: user._id,
       user,
