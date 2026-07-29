@@ -38,7 +38,9 @@ export const registerUser = async (req, res) => {
       fullName,
       email,
       password,
-      profileImageUrl: profileImageUrl.secure_url ? profileImageUrl.secure_url : "",
+      ...(profileImageUrl?.secure_url && {
+        profileImageUrl: profileImageUrl.secure_url,
+      }),
     });
 
     res.status(201).json({

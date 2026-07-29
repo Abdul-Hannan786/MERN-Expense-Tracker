@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
-
 dotenv.config();
-
+api
 import { v2 as cloudinary } from "cloudinary";
 import { Readable } from "stream";
 
@@ -12,6 +11,8 @@ cloudinary.config({
 });
 
 export const uploadToCloudinary = (buffer, folder = "courses") => {
+  console.log("Cloudinary config before upload:");
+  console.log(cloudinary.config());
 
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
